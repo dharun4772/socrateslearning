@@ -1,0 +1,201 @@
+question,category,difficulty
+How does backpropagation work in deep neural networks? (Q954),Deep Learning,Hard
+"What is the mean, median, and mode? (Q405)",Statistics,Easy
+Explain the architecture and benefits of Transformer models. (Q710),Deep Learning,Hard
+Explain the kernel trick in SVMs. (Q87),Machine Learning,Hard
+What is a p-value? (Q821),Statistics,Easy
+What is Bayesian inference? (Q552),Statistics,Hard
+What is overfitting in deep learning? (Q608),Deep Learning,Easy
+Explain maximum likelihood estimation. (Q939),Statistics,Hard
+How do you interpret a confidence interval? (Q728),Statistics,Hard
+Explain the central limit theorem. (Q298),Statistics,Medium
+What is a p-value? (Q838),Statistics,Easy
+Explain maximum likelihood estimation. (Q251),Statistics,Hard
+Explain the architecture and benefits of Transformer models. (Q780),Deep Learning,Hard
+Name three types of machine learning algorithms. (Q312),Machine Learning,Easy
+"What is the mean, median, and mode? (Q479)",Statistics,Easy
+What is Bayesian inference? (Q130),Statistics,Hard
+What are the differences between GRU and LSTM units? (Q688),Deep Learning,Hard
+Name three types of machine learning algorithms. (Q460),Machine Learning,Easy
+What is overfitting in deep learning? (Q193),Deep Learning,Easy
+What is the bias-variance tradeoff? (Q203),Machine Learning,Hard
+Explain the central limit theorem. (Q115),Statistics,Medium
+What is overfitting in deep learning? (Q999),Deep Learning,Easy
+How does backpropagation work in deep neural networks? (Q687),Deep Learning,Hard
+What is a neural network? (Q14),Deep Learning,Easy
+What is overfitting in deep learning? (Q417),Deep Learning,Easy
+What is transfer learning and when would you use it? (Q873),Deep Learning,Medium
+Explain the kernel trick in SVMs. (Q807),Machine Learning,Hard
+How do ensemble methods like Random Forests and Gradient Boosting differ? (Q48),Machine Learning,Hard
+What is hypothesis testing? (Q655),Statistics,Medium
+"What is the mean, median, and mode? (Q698)",Statistics,Easy
+Explain the vanishing gradient problem. (Q145),Deep Learning,Medium
+How do ensemble methods like Random Forests and Gradient Boosting differ? (Q463),Machine Learning,Hard
+What is a neural network? (Q933),Deep Learning,Easy
+What is the difference between population and sample? (Q425),Statistics,Easy
+"What is the mean, median, and mode? (Q71)",Statistics,Easy
+What is Bayesian inference? (Q721),Statistics,Hard
+What is hypothesis testing? (Q689),Statistics,Medium
+What is a neural network? (Q268),Deep Learning,Easy
+What is the bias-variance tradeoff? (Q822),Machine Learning,Hard
+Explain the central limit theorem. (Q406),Statistics,Medium
+What is overfitting in deep learning? (Q976),Deep Learning,Easy
+Explain maximum likelihood estimation. (Q89),Statistics,Hard
+What is Bayesian inference? (Q370),Statistics,Hard
+What is transfer learning and when would you use it? (Q65),Deep Learning,Medium
+What is supervised learning? (Q805),Machine Learning,Easy
+Explain the architecture and benefits of Transformer models. (Q107),Deep Learning,Hard
+What are Type I and Type II errors? (Q663),Statistics,Medium
+What is the bias-variance tradeoff? (Q751),Machine Learning,Hard
+What is the role of an activation function? (Q92),Deep Learning,Easy
+Name three types of machine learning algorithms. (Q929),Machine Learning,Easy
+What is cross-validation and why is it important? (Q565),Machine Learning,Medium
+What is hypothesis testing? (Q517),Statistics,Medium
+What is regularization and what are L1 and L2 penalties? (Q865),Machine Learning,Medium
+What is the difference between population and sample? (Q517),Statistics,Easy
+"What is the mean, median, and mode? (Q235)",Statistics,Easy
+What is the difference between population and sample? (Q74),Statistics,Easy
+How do you interpret a confidence interval? (Q372),Statistics,Hard
+What is supervised learning? (Q902),Machine Learning,Easy
+Explain the architecture and benefits of Transformer models. (Q952),Deep Learning,Hard
+What are convolutional neural networks (CNNs) used for? (Q468),Deep Learning,Medium
+What are the differences between GRU and LSTM units? (Q713),Deep Learning,Hard
+What are the differences between GRU and LSTM units? (Q292),Deep Learning,Hard
+What is a p-value? (Q27),Statistics,Easy
+What is the bias-variance tradeoff? (Q342),Machine Learning,Hard
+Explain how a decision tree works. (Q659),Machine Learning,Medium
+What is the bias-variance tradeoff? (Q768),Machine Learning,Hard
+What is regularization and what are L1 and L2 penalties? (Q193),Machine Learning,Medium
+What are convolutional neural networks (CNNs) used for? (Q443),Deep Learning,Medium
+What is hypothesis testing? (Q674),Statistics,Medium
+What is the difference between classification and regression? (Q505),Machine Learning,Easy
+What is cross-validation and why is it important? (Q906),Machine Learning,Medium
+What are the differences between GRU and LSTM units? (Q180),Deep Learning,Hard
+How do you interpret a confidence interval? (Q370),Statistics,Hard
+How do ensemble methods like Random Forests and Gradient Boosting differ? (Q87),Machine Learning,Hard
+Explain the architecture and benefits of Transformer models. (Q474),Deep Learning,Hard
+What is the difference between classification and regression? (Q620),Machine Learning,Easy
+Explain the kernel trick in SVMs. (Q692),Machine Learning,Hard
+Explain how a decision tree works. (Q500),Machine Learning,Medium
+What is the difference between classification and regression? (Q964),Machine Learning,Easy
+What is supervised learning? (Q375),Machine Learning,Easy
+How does backpropagation work in deep neural networks? (Q997),Deep Learning,Hard
+How does backpropagation work in deep neural networks? (Q385),Deep Learning,Hard
+What is the bias-variance tradeoff? (Q263),Machine Learning,Hard
+What is the role of an activation function? (Q743),Deep Learning,Easy
+Explain the vanishing gradient problem. (Q154),Deep Learning,Medium
+What is transfer learning and when would you use it? (Q623),Deep Learning,Medium
+What is supervised learning? (Q298),Machine Learning,Easy
+What is a neural network? (Q930),Deep Learning,Easy
+What is cross-validation and why is it important? (Q476),Machine Learning,Medium
+What is cross-validation and why is it important? (Q780),Machine Learning,Medium
+What is overfitting in deep learning? (Q573),Deep Learning,Easy
+What are convolutional neural networks (CNNs) used for? (Q643),Deep Learning,Medium
+Explain maximum likelihood estimation. (Q717),Statistics,Hard
+What is cross-validation and why is it important? (Q942),Machine Learning,Medium
+What is supervised learning? (Q480),Machine Learning,Easy
+How do ensemble methods like Random Forests and Gradient Boosting differ? (Q868),Machine Learning,Hard
+What is regularization and what are L1 and L2 penalties? (Q939),Machine Learning,Medium
+What is hypothesis testing? (Q235),Statistics,Medium
+What are convolutional neural networks (CNNs) used for? (Q927),Deep Learning,Medium
+What is Bayesian inference? (Q337),Statistics,Hard
+"What is the mean, median, and mode? (Q188)",Statistics,Easy
+"What is the mean, median, and mode? (Q973)",Statistics,Easy
+What is the role of an activation function? (Q87),Deep Learning,Easy
+What is the difference between classification and regression? (Q333),Machine Learning,Easy
+What are convolutional neural networks (CNNs) used for? (Q603),Deep Learning,Medium
+What is hypothesis testing? (Q169),Statistics,Medium
+What is regularization and what are L1 and L2 penalties? (Q386),Machine Learning,Medium
+What is Bayesian inference? (Q881),Statistics,Hard
+Explain how a decision tree works. (Q901),Machine Learning,Medium
+What is overfitting in deep learning? (Q313),Deep Learning,Easy
+Explain maximum likelihood estimation. (Q271),Statistics,Hard
+How does backpropagation work in deep neural networks? (Q78),Deep Learning,Hard
+What is cross-validation and why is it important? (Q640),Machine Learning,Medium
+What are convolutional neural networks (CNNs) used for? (Q119),Deep Learning,Medium
+What is the bias-variance tradeoff? (Q472),Machine Learning,Hard
+Explain maximum likelihood estimation. (Q166),Statistics,Hard
+What are the differences between GRU and LSTM units? (Q803),Deep Learning,Hard
+"What is the mean, median, and mode? (Q222)",Statistics,Easy
+Explain maximum likelihood estimation. (Q179),Statistics,Hard
+What is the difference between population and sample? (Q234),Statistics,Easy
+What is cross-validation and why is it important? (Q235),Machine Learning,Medium
+Explain the vanishing gradient problem. (Q405),Deep Learning,Medium
+What are Type I and Type II errors? (Q783),Statistics,Medium
+How does backpropagation work in deep neural networks? (Q918),Deep Learning,Hard
+What is Bayesian inference? (Q743),Statistics,Hard
+Explain the central limit theorem. (Q86),Statistics,Medium
+How do ensemble methods like Random Forests and Gradient Boosting differ? (Q571),Machine Learning,Hard
+What is the difference between classification and regression? (Q831),Machine Learning,Easy
+What are the differences between GRU and LSTM units? (Q690),Deep Learning,Hard
+How does backpropagation work in deep neural networks? (Q17),Deep Learning,Hard
+How do ensemble methods like Random Forests and Gradient Boosting differ? (Q780),Machine Learning,Hard
+Name three types of machine learning algorithms. (Q662),Machine Learning,Easy
+What is the difference between population and sample? (Q129),Statistics,Easy
+How do you interpret a confidence interval? (Q672),Statistics,Hard
+What are Type I and Type II errors? (Q711),Statistics,Medium
+What is the role of an activation function? (Q741),Deep Learning,Easy
+"What is the mean, median, and mode? (Q935)",Statistics,Easy
+Explain how a decision tree works. (Q519),Machine Learning,Medium
+Explain how a decision tree works. (Q76),Machine Learning,Medium
+How does backpropagation work in deep neural networks? (Q425),Deep Learning,Hard
+What is cross-validation and why is it important? (Q846),Machine Learning,Medium
+What are the differences between GRU and LSTM units? (Q598),Deep Learning,Hard
+Explain the kernel trick in SVMs. (Q700),Machine Learning,Hard
+What is the difference between classification and regression? (Q627),Machine Learning,Easy
+What is Bayesian inference? (Q769),Statistics,Hard
+How do ensemble methods like Random Forests and Gradient Boosting differ? (Q140),Machine Learning,Hard
+What is the difference between classification and regression? (Q857),Machine Learning,Easy
+What is the role of an activation function? (Q708),Deep Learning,Easy
+Name three types of machine learning algorithms. (Q889),Machine Learning,Easy
+What are convolutional neural networks (CNNs) used for? (Q260),Deep Learning,Medium
+What is transfer learning and when would you use it? (Q662),Deep Learning,Medium
+What is cross-validation and why is it important? (Q295),Machine Learning,Medium
+What are convolutional neural networks (CNNs) used for? (Q309),Deep Learning,Medium
+What is hypothesis testing? (Q414),Statistics,Medium
+Explain the central limit theorem. (Q990),Statistics,Medium
+How do ensemble methods like Random Forests and Gradient Boosting differ? (Q559),Machine Learning,Hard
+What is hypothesis testing? (Q857),Statistics,Medium
+Explain how a decision tree works. (Q38),Machine Learning,Medium
+What is a neural network? (Q384),Deep Learning,Easy
+How does backpropagation work in deep neural networks? (Q522),Deep Learning,Hard
+Explain the kernel trick in SVMs. (Q239),Machine Learning,Hard
+What is Bayesian inference? (Q139),Statistics,Hard
+What is Bayesian inference? (Q220),Statistics,Hard
+What is the role of an activation function? (Q807),Deep Learning,Easy
+What is cross-validation and why is it important? (Q483),Machine Learning,Medium
+What is transfer learning and when would you use it? (Q554),Deep Learning,Medium
+Explain the vanishing gradient problem. (Q236),Deep Learning,Medium
+What is a neural network? (Q93),Deep Learning,Easy
+What are the differences between GRU and LSTM units? (Q581),Deep Learning,Hard
+What is the difference between classification and regression? (Q560),Machine Learning,Easy
+What is the difference between classification and regression? (Q937),Machine Learning,Easy
+What is overfitting in deep learning? (Q148),Deep Learning,Easy
+What is the bias-variance tradeoff? (Q949),Machine Learning,Hard
+What are the differences between GRU and LSTM units? (Q46),Deep Learning,Hard
+What is transfer learning and when would you use it? (Q457),Deep Learning,Medium
+What is supervised learning? (Q261),Machine Learning,Easy
+Name three types of machine learning algorithms. (Q596),Machine Learning,Easy
+Explain how a decision tree works. (Q445),Machine Learning,Medium
+What is hypothesis testing? (Q324),Statistics,Medium
+What is regularization and what are L1 and L2 penalties? (Q724),Machine Learning,Medium
+What are the differences between GRU and LSTM units? (Q213),Deep Learning,Hard
+What is regularization and what are L1 and L2 penalties? (Q195),Machine Learning,Medium
+Explain maximum likelihood estimation. (Q376),Statistics,Hard
+Explain maximum likelihood estimation. (Q758),Statistics,Hard
+What is the role of an activation function? (Q160),Deep Learning,Easy
+Explain the kernel trick in SVMs. (Q959),Machine Learning,Hard
+What is the role of an activation function? (Q253),Deep Learning,Easy
+What is transfer learning and when would you use it? (Q20),Deep Learning,Medium
+Explain how a decision tree works. (Q584),Machine Learning,Medium
+What is the bias-variance tradeoff? (Q197),Machine Learning,Hard
+"What is the mean, median, and mode? (Q150)",Statistics,Easy
+What is overfitting in deep learning? (Q472),Deep Learning,Easy
+Explain the architecture and benefits of Transformer models. (Q581),Deep Learning,Hard
+"What is the mean, median, and mode? (Q428)",Statistics,Easy
+What are convolutional neural networks (CNNs) used for? (Q300),Deep Learning,Medium
+What is cross-validation and why is it important? (Q496),Machine Learning,Medium
+What is transfer learning and when would you use it? (Q685),Deep Learning,Medium
+What is transfer learning and when would you use it? (Q915),Deep Learning,Medium
+Explain the vanishing gradient problem. (Q830),Deep Learning,Medium
+What is a p-value? (Q803),Statistics,Easy
