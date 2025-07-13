@@ -20,7 +20,7 @@ class GeminiClient:
         genai.configure(api_key=self.api_key)
         
         # Initialize the free Gemini model
-        self.model = genai.GenerativeModel('gemini-1.5-flash')  # Free tier model
+        self.model = genai.GenerativeModel('gemini-2.0-flash')  # Free tier model
         
     def chat(self, prompt: str, system: str = "", max_retries: int = 3) -> str:
         """

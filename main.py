@@ -18,7 +18,7 @@ df = pd.read_csv("data/data_science_interview_questions.csv")
 
 # Configuration - Change these to switch providers
 LLM_PROVIDER: LLMProvider = "gemini"  # or "ollama"
-LLM_MODEL = "gemini-2.5-flash"  # Free Gemini model
+LLM_MODEL = "gemini-2.0-flash"  # Free Gemini model
 
 # Define shared LangGraph state
 class TeachingState(TypedDict):
@@ -162,25 +162,50 @@ def analyze_learning_progression(history: List[dict]) -> List[str]:
     return [f"Iteration {r['iteration']}: {r['content'][:100]}..." for r in student_responses]
 
 def should_continue_dialogue(state: TeachingState) -> str:
-    """Determine whether to continue the Socratic dialogue or end"""
+    """
+    Determine whether to continue the Socratic dialogue or end.
+    Now with stricter stopping criteria.
+    """
     
     verdict = state.get("dean_verdict", "continue")
+    understanding_level = state.get("understanding_level", "poor")
     iteration_count = state.get("iteration_count", 1)
     max_iterations = state.get("max_iterations", 5)
     
-    print(f"Dean verdict: {verdict}, Iteration: {iteration_count}/{max_iterations}")
+    print(f"🎯 Dean verdict: {verdict}")
+    print(f"📊 Understanding: {understanding_level}")
+    print(f"🔄 Iteration: {iteration_count}/{max_iterations}")
     
+    # Clear stopping conditions (in order of priority)
+    
+    # 1. Student has satisfactory understanding - STOP
     if verdict == "satisfactory":
-        print("✅ Student has reached satisfactory understanding")
+        print("✅ Student has reached satisfactory understanding - ENDING")
         return "cognitive"
+    
+    # 2. Student shows good/excellent understanding - STOP  
+    elif understanding_level in ["good", "excellent"] and iteration_count >= 2:
+        print("🎓 Student demonstrates good understanding - ENDING")
+        return "cognitive"
+    
+    # 3. Maximum iterations reached - STOP
     elif iteration_count >= max_iterations:
-        print("⏰ Maximum iterations reached")
-        return "cognitive" 
-    elif verdict == "continue":
-        print("🔄 Continue Socratic dialogue")
+        print("⏰ Maximum iterations reached - ENDING")
+        return "cognitive"
+        
+    # 4. Safety check: If we've gone 4+ rounds and understanding is developing+ - STOP
+    elif iteration_count >= 4 and understanding_level in ["developing", "good", "excellent"]:
+        print("🛡️ Safety stop: 4+ rounds with developing+ understanding - ENDING")
+        return "cognitive"
+    
+    # 5. Continue only if student truly needs more help
+    elif verdict == "continue" and understanding_level in ["poor", "developing"]:
+        print("🔄 Student needs more guidance - CONTINUING")
         return "student"
+    
+    # 6. Default fallback - end dialogue
     else:
-        print("🎯 Moving to final assessment")
+        print("🎯 Default stop condition reached - ENDING")
         return "cognitive"
 
 # LangGraph Wiring

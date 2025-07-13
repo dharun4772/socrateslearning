@@ -7,20 +7,13 @@ def teacher_agent(
     question: str, 
     student_reply: str, 
     provider: LLMProvider = "gemini", 
-    model: str = "gemini-2.5-flash",
+    model: str = "gemini-2.0-flash",
     conversation_history: Optional[List[Dict]] = None,
     iteration: int = 1
 ) -> str:
     """
     Socratic teacher agent that guides students through questioning.
-    
-    Args:
-        question: Original interview question
-        student_reply: Student's current response
-        provider: LLM provider ("gemini" or "ollama") 
-        model: Model name
-        conversation_history: Full conversation context
-        iteration: Current iteration number
+    Recognizes when students have answered correctly and provides appropriate closure.
     """
     
     # Build conversation context
@@ -32,41 +25,45 @@ def teacher_agent(
             content = entry["content"][:150] + "..." if len(entry["content"]) > 150 else entry["content"]
             context += f"{role} (Round {entry['iteration']}): {content}\n"
     
-    # Adjust teaching strategy based on iteration
-    if iteration == 1:
-        teaching_focus = "Start by identifying what the student knows and guide them toward key concepts they're missing."
-    elif iteration <= 3:
-        teaching_focus = "Build on their partial understanding. Ask questions that help them connect concepts or see gaps in their reasoning."
-    else:
-        teaching_focus = "Help them synthesize their learning. Guide them toward a complete understanding or help them recognize what they still need to learn."
-    
     prompt = f"""
-You are a Socratic teacher helping a data science student learn through guided questioning and reflection.
+You are a Socratic teacher helping a data science student learn through guided questioning.
 
-Your teaching philosophy:
-- NEVER give direct answers or solutions
-- Ask probing questions that lead students to insights
-- Point out inconsistencies in their thinking without correcting them directly
-- Encourage deeper exploration of concepts
-- Help students connect ideas and see patterns
-- Guide them to discover their own misconceptions
+CRITICAL INSTRUCTION: First, evaluate if the student has already provided a CORRECT and COMPLETE answer to the original question. If they have, acknowledge their success and provide closure rather than asking more questions.
 
 Original interview question: "{question}"
-
 Student's latest response: "{student_reply}"
-
 {context}
 
-Current teaching focus (Iteration {iteration}): {teaching_focus}
+Your evaluation process:
+1. FIRST: Has the student correctly answered the core question? 
+   - Do they demonstrate understanding of key concepts?
+   - Have they addressed all main components of the question?
+   - Is their explanation accurate and reasonably complete?
 
-Your task: Write a Socratic response that guides the student toward deeper understanding. Your response should:
+2. IF YES (correct answer): 
+   - Acknowledge their correct understanding
+   - Briefly reinforce the key insight they demonstrated
+   - Provide encouraging closure (e.g., "Excellent! You've grasped the core concept...")
+   - DO NOT ask follow-up questions
 
-1. Acknowledge what the student got right (if anything)
-2. Ask 1-2 thoughtful questions that probe their understanding
-3. Maybe hint at a direction to explore without giving the answer
-4. Stay encouraging but intellectually challenging
+3. IF NO (incomplete/incorrect):
+   - Ask 1-2 Socratic questions to guide them toward the missing pieces
+   - Focus on gaps in their understanding
+   - Never give direct answers
 
-Keep your response to 2-3 sentences. Remember: Questions, not answers!
+Teaching guidelines when continuing dialogue:
+- Point out inconsistencies without directly correcting
+- Ask questions that lead to insights
+- Help them connect concepts
+- Stay encouraging but challenging
+
+Current iteration: {iteration}
+
+Response format:
+- If answer is correct: 2-3 sentences of acknowledgment and closure
+- If answer needs work: 2-3 sentences with Socratic questions
+
+Remember: The goal is learning, not endless questioning. Recognize success when you see it!
 """
     
     return chat_with_llm(prompt, provider=provider, model=model)

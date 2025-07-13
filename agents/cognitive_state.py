@@ -8,7 +8,7 @@ import json
 def generate_cognitive_state(
     persona: str,
     provider: LLMProvider = "gemini",
-    model: str = "gemini-2.5-flash", 
+    model: str = "gemini-2.0-flash", 
     conversation_history: Optional[List[Dict]] = None,
     final_understanding: Optional[str] = None
 ) -> dict:

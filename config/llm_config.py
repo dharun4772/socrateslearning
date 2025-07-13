@@ -16,9 +16,9 @@ OLLAMA_MODELS = {
 }
 
 GEMINI_MODELS = {
-    "gemini-2.5-flash": "gemini-2.5-flash",  # Free tier
-    "gemini-2.5-pro": "gemini-2.5-pro",      # Paid tier (better quality)
-    "gemini": "gemini-2.5-flash"             # Default alias
+    "gemini-2.0-flash": "gemini-2.0-flash",  # Free tier
+    "gemini-2.0-pro": "gemini-2.0-pro",      # Paid tier (better quality)
+    "gemini": "gemini-2.0-flash"             # Default alias
 }
 
 class LLMClient:
@@ -27,7 +27,6 @@ class LLMClient:
     def __init__(self, provider: LLMProvider = "gemini", model: str = "gemini-2.5-flash"):
         self.provider = provider
         self.model = model
-        
         # Validate model for provider
         if provider == "ollama" and model not in OLLAMA_MODELS:
             raise ValueError(f"Model {model} not available for Ollama. Available: {list(OLLAMA_MODELS.keys())}")
@@ -60,7 +59,7 @@ if __name__ == "__main__":
     test_prompt = "What is the capital of France?"
     
     print("Testing Gemini (free):")
-    gemini_response = chat_with_llm(test_prompt, provider="gemini", model="gemini-2.5-flash")
+    gemini_response = chat_with_llm(test_prompt, provider="gemini", model="gemini-2.0-flash")
     print(f"Gemini: {gemini_response}\n")
     
     print("Testing Ollama:")

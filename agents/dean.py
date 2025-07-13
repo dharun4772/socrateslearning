@@ -10,71 +10,82 @@ def dean_agent(
     current_iteration: int,
     max_iterations: int,
     provider: LLMProvider = "gemini", 
-    model: str = "gemini-2.5-flash"
+    model: str = "gemini-2.0-flash"
 ) -> dict:
     """
-    Dean agent that evaluates the overall learning progress and decides whether to continue.
-    
-    Args:
-        question: Original interview question
-        conversation_history: Full conversation between student and teacher
-        current_iteration: Current iteration number
-        max_iterations: Maximum allowed iterations
-        provider: LLM provider ("gemini" or "ollama")
-        model: Model name
+    Dean agent that evaluates learning progress with strict stopping criteria.
+    Ends dialogue when student demonstrates correct understanding.
     """
     
     # Extract student responses to analyze learning progression
     student_responses = [entry for entry in conversation_history if entry["role"] == "student"]
     teacher_responses = [entry for entry in conversation_history if entry["role"] == "teacher"]
     
-    # Build conversation summary
+    # Get the most recent student response for detailed analysis
+    latest_student_response = student_responses[-1]["content"] if student_responses else ""
+    
+    # Build conversation summary (last 2-3 exchanges for context)
     conversation_summary = ""
-    for i, (student, teacher) in enumerate(zip(student_responses, teacher_responses), 1):
-        conversation_summary += f"Round {i}:\n"
-        conversation_summary += f"Student: {student['content'][:200]}...\n" if len(student['content']) > 200 else f"Student: {student['content']}\n"
-        conversation_summary += f"Teacher: {teacher['content'][:200]}...\n\n" if len(teacher['content']) > 200 else f"Teacher: {teacher['content']}\n\n"
+    recent_pairs = list(zip(student_responses, teacher_responses))[-2:]  # Last 2 rounds
+    
+    for i, (student, teacher) in enumerate(recent_pairs, len(recent_pairs)-1):
+        conversation_summary += f"Round {i+1}:\n"
+        conversation_summary += f"Student: {student['content']}\n"
+        conversation_summary += f"Teacher: {teacher['content']}\n\n"
     
     prompt = f"""
-You are the Dean evaluating a Socratic dialogue session between a teacher and student.
+You are the Dean evaluating a Socratic dialogue session. Your PRIMARY job is to determine if the student has CORRECTLY ANSWERED the original question.
 
-Your job is to assess:
-1. Student's learning progression and current understanding level
-2. Whether the dialogue should continue or if learning objectives are met
-3. Quality of the Socratic teaching method being used
+CRITICAL: If the student demonstrates correct understanding, END the dialogue immediately. Do not continue just because they ask follow-up questions.
 
 Original question: "{question}"
 
-Conversation summary (Iteration {current_iteration}/{max_iterations}):
+Most recent student response: "{latest_student_response}"
+
+Recent conversation:
 {conversation_summary}
 
-Based on this dialogue, evaluate:
+Evaluation criteria (in order of priority):
+
+1. ANSWER CORRECTNESS: Does the student's response correctly address the core question?
+   - Are the main concepts explained accurately?
+   - Have they covered the essential components?
+   - Is their understanding fundamentally sound?
+
+2. COMPLETENESS: Is the answer reasonably complete for the question level?
+   - No need for PhD-level depth on basic questions
+   - Match completeness expectations to question difficulty
+
+3. UNDERSTANDING DEMONSTRATION: Can they explain the concept clearly?
+   - Do they show genuine comprehension vs. memorization?
+   - Can they connect related ideas?
+
+VERDICT RULES:
+- "satisfactory": Student has correctly answered the question with good understanding
+- "continue": Student needs guidance on core concepts OR has significant misconceptions  
+- "max_reached": Hit iteration limit regardless of understanding
 
 UNDERSTANDING LEVELS:
-- "poor": Student shows little to no understanding, many misconceptions
-- "developing": Student grasps some concepts but has significant gaps
-- "good": Student demonstrates solid understanding with minor gaps
-- "excellent": Student shows comprehensive understanding and can explain concepts clearly
+- "excellent": Perfect understanding, clear explanation, connects concepts
+- "good": Correct answer with solid understanding, minor gaps OK
+- "developing": Partial understanding, some correct elements, needs guidance
+- "poor": Little understanding, major misconceptions, far from correct answer
 
-VERDICT OPTIONS:
-- "continue": Student is learning but needs more guidance
-- "satisfactory": Student has reached good understanding, dialogue can end
-- "max_reached": Maximum iterations reached, end regardless of understanding
-
-Return your assessment as JSON:
+Return assessment as JSON:
 {{
   "verdict": "continue/satisfactory/max_reached",
-  "understanding_level": "poor/developing/good/excellent",
-  "reasoning": "Brief explanation of your decision",
-  "key_insights_gained": ["list", "of", "insights", "student", "demonstrated"],
-  "remaining_gaps": ["list", "of", "concepts", "still", "unclear"]
+  "understanding_level": "poor/developing/good/excellent", 
+  "reasoning": "Brief explanation focusing on answer correctness",
+  "answer_correctness": "correct/partially_correct/incorrect",
+  "key_insights_gained": ["specific correct concepts demonstrated"],
+  "remaining_gaps": ["only list if verdict is continue"]
 }}
 
-Consider:
-- Is the student making meaningful progress?
-- Are they connecting concepts better than in earlier rounds?
-- Have they addressed the core components of the question?
-- Is continued dialogue likely to yield significant additional learning?
+IMPORTANT: 
+- If understanding_level is "good" or "excellent" AND answer_correctness is "correct", verdict should be "satisfactory"
+- Don't extend dialogue just because student asks deeper questions
+- Focus on whether they've answered the ORIGINAL question, not potential follow-ups
+- Iteration {current_iteration}/{max_iterations}
 """
     
     response = chat_with_llm(prompt, provider=provider, model=model)
@@ -83,8 +94,18 @@ Consider:
         result = json.loads(response)
         
         # Validate the response structure
-        if "verdict" not in result or "understanding_level" not in result:
-            raise ValueError("Missing required fields")
+        required_fields = ["verdict", "understanding_level", "answer_correctness"]
+        if not all(field in result for field in required_fields):
+            raise ValueError(f"Missing required fields: {required_fields}")
+        
+        # Enforce stopping rules based on correctness
+        if (result.get("answer_correctness") == "correct" and 
+            result.get("understanding_level") in ["good", "excellent"] and
+            result.get("verdict") == "continue"):
+            
+            print("🎯 Dean override: Student has correct answer, ending dialogue")
+            result["verdict"] = "satisfactory"
+            result["reasoning"] = "Answer is correct with good understanding. " + result.get("reasoning", "")
         
         # Override verdict if max iterations reached
         if current_iteration >= max_iterations and result["verdict"] == "continue":
@@ -97,20 +118,31 @@ Consider:
         print(f"Dean agent JSON parsing error: {e}")
         print(f"Raw response: {response}")
         
-        # Fallback decision logic
+        # Conservative fallback - end if we've made several attempts
         if current_iteration >= max_iterations:
             return {
                 "verdict": "max_reached",
                 "understanding_level": "developing",
+                "answer_correctness": "unknown",
                 "reasoning": "Maximum iterations reached, ending dialogue",
+                "key_insights_gained": ["Assessment incomplete due to parsing error"],
+                "remaining_gaps": ["Unable to assess due to error"]
+            }
+        elif current_iteration >= 3:  # Conservative stopping after 3 rounds if parsing fails
+            return {
+                "verdict": "satisfactory",
+                "understanding_level": "developing",
+                "answer_correctness": "unknown", 
+                "reasoning": "Ending dialogue due to parsing error after multiple rounds",
                 "key_insights_gained": ["Some progress observed"],
-                "remaining_gaps": ["Assessment incomplete due to parsing error"]
+                "remaining_gaps": ["Assessment incomplete"]
             }
         else:
             return {
                 "verdict": "continue",
-                "understanding_level": "developing", 
-                "reasoning": "Continuing dialogue due to parsing error",
+                "understanding_level": "developing",
+                "answer_correctness": "unknown",
+                "reasoning": "Continuing dialogue despite parsing error",
                 "key_insights_gained": ["Assessment incomplete"],
                 "remaining_gaps": ["Unable to assess due to error"]
             }

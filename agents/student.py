@@ -8,7 +8,7 @@ def student_agent(
     question: str, 
     persona: str, 
     provider: LLMProvider = "gemini", 
-    model: str = "gemini-2.5-flash",
+    model: str = "gemini-2.0-flash",
     teacher_guidance: Optional[str] = None,
     conversation_history: Optional[List[Dict]] = None
 ) -> str:
